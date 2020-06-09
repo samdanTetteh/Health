@@ -14,6 +14,11 @@ buildscript {
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
     }
+
+    dependencies {
+        def nav = "2.3.0-beta01"
+        classpath "androidx.navigation:navigation-safe-args-gradle-plugin:$nav"
+    }
 }
 
 allprojects {
@@ -26,4 +31,15 @@ allprojects {
 
 task clean(type: Delete) {
     delete rootProject.buildDir
+}
+
+
+ext{
+    room_version = '2.2.5'
+    nav_version = '2.3.0-beta01'
+    glide_version = '4.11.0'
+    paging_version = '2.1.0-alpha01'
+    retrofit_version = '2.6.0'
+    coroutines_verion = '1.2.1'
+    view_model_version = '2.0.0'
 }
