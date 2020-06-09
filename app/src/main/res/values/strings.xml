@@ -6,4 +6,8 @@
 
 
     <string name="error_txt">Sorry cannot load data please check internet connection</string>
+    <string name="file_name">Hospital.csv</string>
+    <string name="file">Hospital</string>
+    <string name="file_extension">csv</string>
+    <string name="error_msg">Sorry could not load file</string>
 </resources>
