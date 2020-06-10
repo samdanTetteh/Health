@@ -3,9 +3,7 @@ package com.ijikod.sensyne
 import android.app.Application
 import android.content.Context
 import android.os.Environment
-import java.io.File
-import java.io.FileOutputStream
-import java.io.InputStream
+import java.io.*
 
 class FileHelper {
 
@@ -34,11 +32,11 @@ class FileHelper {
             return storageDir?.let { file }
         }
 
-        fun readFile(app: Context): String? {
+        fun readFile(app: Context): BufferedReader {
             val file = File(app.getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS), "Hospital.csv")
-            return if (file.exists()) {
-                file.readText()
-            } else null
+            return (if (file.exists()) {
+                BufferedReader(FileReader(File(app.getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS), "Hospital.csv")))
+            } else null) as BufferedReader
         }
     }
 }

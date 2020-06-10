@@ -2,13 +2,16 @@ package com.ijikod.sensyne
 
 import android.content.Context
 import android.net.ConnectivityManager
+import android.os.Environment
 import android.util.Log
 import android.view.View
+import android.widget.Toast
 import androidx.annotation.WorkerThread
 import androidx.lifecycle.MutableLiveData
 import com.ijikod.sensyne.App.Companion.appContext
 import com.ijikod.sensyne.FileHelper.Companion.createFile
 import com.ijikod.sensyne.Model.Hospital
+import com.ijikod.sensyne.Model.SensyneDatabase
 import com.squareup.moshi.JsonAdapter
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.Types
@@ -16,19 +19,30 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import java.io.BufferedReader
 import java.io.File
+import java.io.FileReader
+import java.io.IOException
 
 class Repository(val context: Context) {
 
+    lateinit var fileReader: BufferedReader
 
-    val hospitalData = MutableLiveData<Hospital>()
-    val errorMsg = MutableLiveData<String>()
+    val hospitalData = MutableLiveData<List<Hospital>>()
+    private val errorMsg = MutableLiveData<String>()
+    private val dao = SensyneDatabase.getDatabase(context).hospitalDao()
 
 
     init {
-
         CoroutineScope(Dispatchers.IO).launch{
-            downloadFile()
+            if (dao.getAll().isEmpty()){
+                downloadFile()
+            }else{
+                hospitalData.postValue(dao.getAll())
+                withContext(Dispatchers.Main) {
+                    Toast.makeText(context, "Using local data", Toast.LENGTH_LONG).show()
+                }
+            }
         }
 
     }
@@ -80,9 +94,70 @@ class Repository(val context: Context) {
 
 
 
-    private fun readDataFromCache() {
-        val json = FileHelper.readFile(context)
-        Log.d("file from file system", json)
+    private suspend fun readDataFromCache() {
+        val hospitals = mutableListOf<Hospital>()
+
+ try {
+     
+ 
+
+        var line: String?
+     fileReader = FileHelper.readFile(context)
+     fileReader?.readLine()
+
+        // Read the file line by line starting from the second line
+
+        line = fileReader?.readLine()
+        while (line != null) {
+            val lineData = line.split(Regex("[�]"))
+            if (lineData.isNotEmpty()) {
+                val hospital  = Hospital(
+                    organisationID = lineData[0].toLong(),
+                    organisationCode = lineData[1],
+                    organisationType = lineData[2],
+                    subType = lineData[3],
+                    sector =lineData[4],
+                    organisationStatus = lineData[5],
+                    isPimsManaged = lineData[6],
+                    organisationName = lineData[7],
+                    address1 = lineData[8],
+                    address2 = lineData[9],
+                    address3 = lineData[10],
+                    city = lineData[11],
+                    county = lineData[12],
+                    postcode = lineData[13],
+                    latitude = lineData[14].toDouble(),
+                    longitude = lineData[15].toDouble(),
+                    parentODSCode = lineData[16],
+                    parentName = lineData[17],
+                    phone = lineData[18],
+                    email = lineData[19],
+                    website = lineData[20],
+                    fax = lineData[21]
+                )
+
+                hospitals.add(hospital)
+            }
+            line = fileReader.readLine()
+        }
+
+ }catch (e: Exception){
+     errorMsg.postValue(context.getString(R.string.error_reading_file_txt))
+ }finally {
+     try {
+         Log.d("hospital>>>>>>>>", "${hospitals.size} is the size")
+         hospitalData.postValue(hospitals)
+         dao.deleteAll()
+         dao.insertHospitals(hospitals)
+         fileReader.close()
+     }catch (e: IOException){
+         errorMsg.postValue(context.getString(R.string.error_closing_file_txt))
+         CoroutineScope(Dispatchers.Main).launch {
+             Toast.makeText(context, context.getString(R.string.error_closing_file_txt), Toast.LENGTH_LONG).show()
+         }
+     }
+ }
+
     }
 
 

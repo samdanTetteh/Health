@@ -1,10 +1,12 @@
 package com.ijikod.sensyne
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 
 /**
@@ -24,6 +26,10 @@ class ListFragment : Fragment() {
 
         viewModel = ViewModelProviders.of(this, App.provideViewModelFactory(requireContext())).get(ListViewModel::class.java)
 
+
+        viewModel.hospitalData.observe(requireActivity(), Observer {
+            Log.d("in list fragment",  "size of data = ${it.size}")
+        })
 
         return view
     }

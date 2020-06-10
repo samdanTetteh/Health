@@ -1,7 +1,15 @@
 package com.ijikod.sensyne.Model
 
+import android.os.Parcelable
+import androidx.room.Entity
+import androidx.room.PrimaryKey
+import kotlinx.android.parcel.Parcelize
 
+
+@Parcelize
+@Entity(tableName = "Hospitals")
 data class Hospital (
+    @PrimaryKey()
     val organisationID: Long,
     val organisationCode: String?,
     val organisationType: String?,
@@ -24,4 +32,4 @@ data class Hospital (
     val email: String?,
     val website: String?,
     val fax: String?
-)
+):Parcelable
