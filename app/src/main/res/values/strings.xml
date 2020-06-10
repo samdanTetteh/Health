@@ -12,4 +12,5 @@
     <string name="error_msg">Sorry could not load file</string>
     <string name="error_reading_file_txt">Error reading CSV file!</string>
     <string name="error_closing_file_txt">Error closing file!</string>
+    <string name="details_arrow_txt">details arrow</string>
 </resources>

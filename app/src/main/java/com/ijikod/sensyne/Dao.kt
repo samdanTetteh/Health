@@ -10,7 +10,7 @@ import com.ijikod.sensyne.Model.Hospital
 @Dao
 interface Dao {
 
-    @Query("SELECT * from Hospitals")
+    @Query("SELECT * from Hospitals Order by organisationName ASC")
     fun getAll(): List<Hospital>
 
     @Insert

@@ -29,7 +29,7 @@ class Repository(val context: Context) {
     lateinit var fileReader: BufferedReader
 
     val hospitalData = MutableLiveData<List<Hospital>>()
-    private val errorMsg = MutableLiveData<String>()
+    val errorMsg = MutableLiveData<String>()
     private val dao = SensyneDatabase.getDatabase(context).hospitalDao()
 
 
@@ -90,7 +90,6 @@ class Repository(val context: Context) {
 
 
     }
-
 
 
 
