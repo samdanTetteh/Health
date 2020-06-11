@@ -73,7 +73,7 @@ class ListFragment(val inspector: Inspector) : Fragment() {
 
         viewModel.errorMsgs.observe(requireActivity(), Observer {
             errorTxt.text = it
-            showList(false)
+            it.isEmpty().let { it -> showList(it) }
         })
 
         setHasOptionsMenu(true)

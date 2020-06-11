@@ -1,6 +1,7 @@
 package com.ijikod.sensyne.Model
 
 import android.os.Parcelable
+import androidx.annotation.NonNull
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import kotlinx.android.parcel.Parcelize
@@ -9,7 +10,7 @@ import kotlinx.android.parcel.Parcelize
 @Parcelize
 @Entity(tableName = "Hospitals")
 data class Hospital (
-    @PrimaryKey()
+    @PrimaryKey(autoGenerate = true)
     val organisationID: Long,
     val organisationCode: String?,
     val organisationType: String?,

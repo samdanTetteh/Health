@@ -21,6 +21,9 @@ interface Dao {
     @Insert
     suspend fun insertHospitals(hospitals: List<Hospital>)
 
+    @Insert
+     fun insertHospitalsTest(hospitals: List<Hospital>)
+
     @Query("DELETE from Hospitals")
     suspend fun deleteAll()
 

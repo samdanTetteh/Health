@@ -98,6 +98,9 @@ class Repository(val context: Context) {
 
         }else{
             errorMsg.postValue(context.getString(R.string.error_txt))
+            CoroutineScope(Dispatchers.Main).launch {
+                Toast.makeText(context, context.getString(R.string.error_txt), Toast.LENGTH_LONG).show()
+            }
             
         }
 
@@ -154,15 +157,13 @@ class Repository(val context: Context) {
             line = fileReader.readLine()
         }
 
-     Log.d("hospital>>>>>>>>", "${hospitals.size} is the size")
      dao.deleteAll()
      dao.insertHospitals(hospitals)
      hospitalData.postValue(dao.getAll())
 
  }catch (e: Exception){
      Log.e("error reading file", e.toString(), e)
-//     errorMsg.postValue(context.getString(R.string.error_reading_file_txt))
-     errorMsg.postValue(e.toString())
+     errorMsg.postValue(context.getString(R.string.error_reading_file_txt))
  }finally {
      try {
          fileReader.close()
