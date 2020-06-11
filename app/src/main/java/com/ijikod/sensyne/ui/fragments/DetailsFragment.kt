@@ -1,4 +1,4 @@
-package com.ijikod.sensyne
+package com.ijikod.sensyne.ui
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -6,9 +6,6 @@ import android.view.LayoutInflater
 import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.TextView
-import androidx.lifecycle.ViewModelProviders
 import com.ijikod.sensyne.databinding.FragmentDetailsBinding
 
 /**
@@ -23,7 +20,9 @@ class DetailsFragment(val inspector: Inspector) : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         val binding  =   FragmentDetailsBinding.inflate(inflater,  container, false)
-        val hospital = arguments?.let { DetailsFragmentArgs.fromBundle(it).hospital }
+        val hospital = arguments?.let { DetailsFragmentArgs.fromBundle(
+            it
+        ).hospital }
 
 
         hospital?.let {

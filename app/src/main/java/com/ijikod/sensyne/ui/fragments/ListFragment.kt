@@ -1,4 +1,4 @@
-package com.ijikod.sensyne
+package com.ijikod.sensyne.ui
 
 import android.os.Bundle
 import android.util.Log
@@ -9,6 +9,7 @@ import android.widget.TextView
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.RecyclerView
+import com.ijikod.sensyne.*
 import com.ijikod.sensyne.Model.Hospital
 
 /**
@@ -27,7 +28,11 @@ class ListFragment(val inspector: Inspector) : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        viewModel = ViewModelProviders.of(this, App.provideViewModelFactory(requireContext())).get(HospitalViewModel::class.java)
+        viewModel = ViewModelProviders.of(this,
+            App.provideViewModelFactory(
+                requireContext()
+            )
+        ).get(HospitalViewModel::class.java)
     }
 
 
@@ -43,9 +48,12 @@ class ListFragment(val inspector: Inspector) : Fragment() {
         errorTxt = view.findViewById(R.id.error_txt)
 
 
-        listener = object : onListItemClick{
+        listener = object : onListItemClick {
             override fun onHospitalClick(data: Hospital) {
-                val action = ListFragmentDirections.actionListFragmentToDetailsFragment(data)
+                val action =
+                    ListFragmentDirections.actionListFragmentToDetailsFragment(
+                        data
+                    )
                 inspector.getNavigation().navigate(action)
             }
         }
@@ -53,7 +61,8 @@ class ListFragment(val inspector: Inspector) : Fragment() {
         viewModel.hospitalData.observe(requireActivity(), Observer {
             Log.d("in list fragment",  "size of data = ${it.size}")
             showList(it.isNotEmpty())
-            adapter = ListAdapter(it, requireContext(), listener)
+            adapter =
+                ListAdapter(it, requireContext(), listener)
             hospitalList.adapter = adapter
         })
 

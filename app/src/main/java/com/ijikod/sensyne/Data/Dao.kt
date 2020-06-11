@@ -1,4 +1,4 @@
-package com.ijikod.sensyne
+package com.ijikod.Data
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

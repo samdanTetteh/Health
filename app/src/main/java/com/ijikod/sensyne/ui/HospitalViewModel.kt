@@ -1,9 +1,8 @@
 package com.ijikod.sensyne
 
 import android.content.Context
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.ijikod.sensyne.Model.Hospital
+import com.ijikod.sensyne.Data.Repository
 
 class HospitalViewModel(val context: Context) : ViewModel() {
 

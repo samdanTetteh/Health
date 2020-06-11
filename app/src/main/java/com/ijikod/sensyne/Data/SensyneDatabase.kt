@@ -4,7 +4,7 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import com.ijikod.sensyne.Dao
+import com.ijikod.Data.Dao
 
 
 @Database(entities = [Hospital::class], version = 1, exportSchema = false)

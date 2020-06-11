@@ -3,6 +3,7 @@ package com.ijikod.sensyne
 import android.app.Application
 import android.content.Context
 import androidx.lifecycle.ViewModelProvider
+import com.ijikod.sensyne.Data.Repository
 
 class App : Application() {
 

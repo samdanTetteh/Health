@@ -1,27 +1,24 @@
-package com.ijikod.sensyne
+package com.ijikod.Data
 
 import android.content.Context
 import android.net.ConnectivityManager
-import android.os.Environment
 import android.util.Log
-import android.view.View
 import android.widget.Toast
 import androidx.annotation.WorkerThread
 import androidx.lifecycle.MutableLiveData
+import com.ijikod.sensyne.ApiClient
 import com.ijikod.sensyne.App.Companion.appContext
+import com.ijikod.sensyne.FileHelper
 import com.ijikod.sensyne.FileHelper.Companion.createFile
 import com.ijikod.sensyne.Model.Hospital
 import com.ijikod.sensyne.Model.SensyneDatabase
-import com.squareup.moshi.JsonAdapter
-import com.squareup.moshi.Moshi
-import com.squareup.moshi.Types
+import com.ijikod.sensyne.R
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import java.io.BufferedReader
 import java.io.File
-import java.io.FileReader
 import java.io.IOException
 
 class Repository(val context: Context) {
@@ -68,13 +65,19 @@ class Repository(val context: Context) {
         if (isNetworkAvailable()){
             try {
                 val file = withContext(Dispatchers.IO) {
-                    val response = ApiClient().getService().downloadFile(context.getString(R.string.file_name)).execute()
+                    val response = ApiClient()
+                        .getService().downloadFile(context.getString(R.string.file_name)).execute()
                     val buffer = response.body()?.byteStream()
                     var file: File? = null
                     if (buffer != null) {
-                        file = context?.let { createFile(it, appContext.getString(R.string.file), context.getString(R.string.file_extension)) }
+                        file = context?.let { createFile(it, appContext.getString(R.string.file), context.getString(
+                            R.string.file_extension
+                        )) }
                         if (file != null) {
-                            FileHelper.copyStreamToFile(buffer, file)
+                            FileHelper.copyStreamToFile(
+                                buffer,
+                                file
+                            )
                         }
                     }
                     file
