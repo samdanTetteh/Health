@@ -1,8 +1,8 @@
-package com.ijikod.sensyne
+package com.ijikod.sensyne.Service
 
+import com.ijikod.sensyne.SERVER_URL
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
-import retrofit2.converter.moshi.MoshiConverterFactory
 import java.util.concurrent.TimeUnit
 
 class ApiClient {
@@ -24,5 +24,6 @@ class ApiClient {
 
     }
 
-    fun getService() : Api = retrofit.create(Api::class.java)
+    fun getService() : Api = retrofit.create(
+        Api::class.java)
 }

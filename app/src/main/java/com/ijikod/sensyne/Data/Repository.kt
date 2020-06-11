@@ -1,4 +1,4 @@
-package com.ijikod.Data
+package com.ijikod.sensyne.Data
 
 import android.content.Context
 import android.net.ConnectivityManager
@@ -6,12 +6,11 @@ import android.util.Log
 import android.widget.Toast
 import androidx.annotation.WorkerThread
 import androidx.lifecycle.MutableLiveData
-import com.ijikod.sensyne.ApiClient
-import com.ijikod.sensyne.App.Companion.appContext
+import com.ijikod.sensyne.Service.ApiClient
+import com.ijikod.sensyne.Application.App.Companion.appContext
 import com.ijikod.sensyne.FileHelper
 import com.ijikod.sensyne.FileHelper.Companion.createFile
 import com.ijikod.sensyne.Model.Hospital
-import com.ijikod.sensyne.Model.SensyneDatabase
 import com.ijikod.sensyne.R
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -123,7 +122,7 @@ class Repository(val context: Context) {
 
         line = fileReader?.readLine()
         while (line != null) {
-            val lineData = line.split(Regex("[�]"))
+            val lineData = line.split(Regex("""[�]"""))
             if (lineData.isNotEmpty()) {
                 val hospital  = Hospital(
                     organisationID = lineData[0].toLong(),
@@ -140,8 +139,8 @@ class Repository(val context: Context) {
                     city = lineData[11],
                     county = lineData[12],
                     postcode = lineData[13],
-                    latitude = lineData[14].toDouble(),
-                    longitude = lineData[15].toDouble(),
+                    latitude = lineData[14].toString(),
+                    longitude = lineData[15].toString(),
                     parentODSCode = lineData[16],
                     parentName = lineData[17],
                     phone = lineData[18],
@@ -155,10 +154,10 @@ class Repository(val context: Context) {
             line = fileReader.readLine()
         }
 
-//     Log.d("hospital>>>>>>>>", "${hospitals.size} is the size")
-//     dao.deleteAll()
-//     dao.insertHospitals(hospitals)
-//     hospitalData.postValue(dao.getAll())
+     Log.d("hospital>>>>>>>>", "${hospitals.size} is the size")
+     dao.deleteAll()
+     dao.insertHospitals(hospitals)
+     hospitalData.postValue(dao.getAll())
 
  }catch (e: Exception){
      Log.e("error reading file", e.toString(), e)
@@ -166,10 +165,6 @@ class Repository(val context: Context) {
      errorMsg.postValue(e.toString())
  }finally {
      try {
-         Log.d("hospital>>>>>>>>", "${hospitals.size} is the size")
-         dao.deleteAll()
-         dao.insertHospitals(hospitals)
-         hospitalData.postValue(dao.getAll())
          fileReader.close()
      }catch (e: IOException){
          errorMsg.postValue(context.getString(R.string.error_closing_file_txt))

@@ -1,12 +1,14 @@
-package com.ijikod.sensyne.ui
+package com.ijikod.sensyne.ui.fragments
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import com.ijikod.sensyne.databinding.FragmentDetailsBinding
+import com.ijikod.sensyne.ui.Inspector
 
 /**
  * A simple [Fragment] subclass.

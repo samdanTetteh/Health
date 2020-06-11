@@ -1,12 +1,12 @@
-package com.ijikod.sensyne
+package com.ijikod.sensyne.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
-import com.ijikod.sensyne.ui.ListFragmentFactory
+import com.ijikod.sensyne.R
 
-class MainActivity : AppCompatActivity(), Inspector{
+class MainActivity : AppCompatActivity(), Inspector {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         supportFragmentManager.fragmentFactory =
@@ -24,7 +24,9 @@ class MainActivity : AppCompatActivity(), Inspector{
     }
 
     override fun getNavigation(): NavController {
-        return  Navigation.findNavController(this, R.id.nav_host)
+        return  Navigation.findNavController(this,
+            R.id.nav_host
+        )
     }
 
 }

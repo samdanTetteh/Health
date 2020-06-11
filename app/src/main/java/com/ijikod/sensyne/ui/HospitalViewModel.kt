@@ -1,4 +1,4 @@
-package com.ijikod.sensyne
+package com.ijikod.sensyne.ui
 
 import android.content.Context
 import androidx.lifecycle.ViewModel

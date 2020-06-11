@@ -1,4 +1,4 @@
-package com.ijikod.sensyne
+package com.ijikod.sensyne.Service
 
 import okhttp3.ResponseBody
 import retrofit2.Call

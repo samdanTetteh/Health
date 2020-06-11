@@ -1,4 +1,4 @@
-package com.ijikod.sensyne
+package com.ijikod.sensyne.ui
 
 import android.content.Context
 import android.view.LayoutInflater
@@ -6,9 +6,9 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.ijikod.sensyne.ListAdapter.viewHolder
+import com.ijikod.sensyne.ui.ListAdapter.viewHolder
 import com.ijikod.sensyne.Model.Hospital
-import kotlinx.android.synthetic.main.list_item.view.*
+import com.ijikod.sensyne.R
 
 class ListAdapter(val hospitalList: List<Hospital> , val context: Context, val onListItemClick: onListItemClick) : RecyclerView.Adapter<viewHolder>() {
 

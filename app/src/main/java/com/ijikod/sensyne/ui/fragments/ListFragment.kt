@@ -1,4 +1,4 @@
-package com.ijikod.sensyne.ui
+package com.ijikod.sensyne.ui.fragments
 
 import android.os.Bundle
 import android.util.Log
@@ -10,7 +10,12 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.RecyclerView
 import com.ijikod.sensyne.*
+import com.ijikod.sensyne.Application.App
 import com.ijikod.sensyne.Model.Hospital
+import com.ijikod.sensyne.ui.HospitalViewModel
+import com.ijikod.sensyne.ui.Inspector
+import com.ijikod.sensyne.ui.ListAdapter
+import com.ijikod.sensyne.ui.onListItemClick
 
 /**
  * A simple [Fragment] subclass.

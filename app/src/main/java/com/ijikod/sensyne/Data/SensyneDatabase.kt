@@ -1,10 +1,10 @@
-package com.ijikod.sensyne.Model
+package com.ijikod.sensyne.Data
 
 import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import com.ijikod.Data.Dao
+import com.ijikod.sensyne.Model.Hospital
 
 
 @Database(entities = [Hospital::class], version = 1, exportSchema = false)

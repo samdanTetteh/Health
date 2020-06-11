@@ -24,8 +24,8 @@ data class Hospital (
     val city: String?,
     val county: String?,
     val postcode: String?,
-    val latitude: Double?,
-    val longitude: Double,
+    val latitude: String?,
+    val longitude: String,
     val parentODSCode: String?,
     val parentName: String?,
     val phone: String?,
@@ -35,7 +35,7 @@ data class Hospital (
 ):Parcelable {
 
     fun getInitials() : String?{
-        val orgName = "${this.organisationName?.split(" ")?.get(0)} ${this.organisationName?.split(" ")?.get(1)}"
+        val orgName =  if (this.organisationName?.split(" ")?.size == 1)  "${this.organisationName.split(" ").get(0)}" else "${this.organisationName?.split(" ")?.get(0)} ${this.organisationName?.split(" ")?.get(1)}"
        return orgName
             ?.split(' ')
             ?.mapNotNull { it.firstOrNull()?.toString() }
