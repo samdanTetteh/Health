@@ -16,18 +16,20 @@ import com.ijikod.sensyne.Model.Hospital
 /**
  * A simple [Fragment] subclass.
  */
-class ListFragment : Fragment() {
+class ListFragment(val inspector: Inspector) : Fragment() {
 
-    lateinit var viewModel: ListViewModel
+    lateinit var viewModel: HospitalViewModel
     lateinit var adapter: ListAdapter
     lateinit var hospitalList : RecyclerView
     lateinit var progressBar: ProgressBar
     lateinit var errorTxt: TextView
 
+    lateinit var listener : onListItemClick
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        viewModel = ViewModelProviders.of(this, App.provideViewModelFactory(requireContext())).get(ListViewModel::class.java)
+        viewModel = ViewModelProviders.of(this, App.provideViewModelFactory(requireContext())).get(HospitalViewModel::class.java)
     }
 
 
@@ -43,11 +45,17 @@ class ListFragment : Fragment() {
         errorTxt = view.findViewById(R.id.error_txt)
 
 
+        listener = object : onListItemClick{
+            override fun onHospitalClick(data: Hospital) {
+                val action = ListFragmentDirections.actionListFragmentToDetailsFragment(data)
+                inspector.getNavigation().navigate(action)
+            }
+        }
 
         viewModel.hospitalData.observe(requireActivity(), Observer {
             Log.d("in list fragment",  "size of data = ${it.size}")
             showList(it.isNotEmpty())
-            adapter = ListAdapter(it, requireContext())
+            adapter = ListAdapter(it, requireContext(), listener)
             hospitalList.adapter = adapter
         })
 
@@ -55,6 +63,9 @@ class ListFragment : Fragment() {
             errorTxt.text = it
             showList(false)
         })
+
+        inspector.setTitle(getString(R.string.home_title))
+        inspector.setActionBarUpVisibility(false)
 
         return view
     }
@@ -71,5 +82,9 @@ class ListFragment : Fragment() {
             hospitalList.visibility = View.GONE
         }
     }
+
+
+
+
 
 }

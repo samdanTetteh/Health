@@ -39,9 +39,6 @@ class Repository(val context: Context) {
                 downloadFile()
             }else{
                 hospitalData.postValue(dao.getAll())
-                withContext(Dispatchers.Main) {
-                    Toast.makeText(context, "Using local data", Toast.LENGTH_LONG).show()
-                }
             }
         }
 
@@ -140,14 +137,17 @@ class Repository(val context: Context) {
             line = fileReader.readLine()
         }
 
+     Log.d("hospital>>>>>>>>", "${hospitals.size} is the size")
+     dao.deleteAll()
+     dao.insertHospitals(hospitals)
+     hospitalData.postValue(dao.getAll())
+
  }catch (e: Exception){
-     errorMsg.postValue(context.getString(R.string.error_reading_file_txt))
+     Log.e("error reading file", e.toString(), e)
+//     errorMsg.postValue(context.getString(R.string.error_reading_file_txt))
+     errorMsg.postValue(e.toString())
  }finally {
      try {
-         Log.d("hospital>>>>>>>>", "${hospitals.size} is the size")
-         hospitalData.postValue(hospitals)
-         dao.deleteAll()
-         dao.insertHospitals(hospitals)
          fileReader.close()
      }catch (e: IOException){
          errorMsg.postValue(context.getString(R.string.error_closing_file_txt))

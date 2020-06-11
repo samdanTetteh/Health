@@ -10,7 +10,7 @@ import com.ijikod.sensyne.ListAdapter.viewHolder
 import com.ijikod.sensyne.Model.Hospital
 import kotlinx.android.synthetic.main.list_item.view.*
 
-class ListAdapter(val hospitalList: List<Hospital> , val context: Context) : RecyclerView.Adapter<viewHolder>() {
+class ListAdapter(val hospitalList: List<Hospital> , val context: Context, val onListItemClick: onListItemClick) : RecyclerView.Adapter<viewHolder>() {
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): viewHolder {
@@ -26,8 +26,13 @@ class ListAdapter(val hospitalList: List<Hospital> , val context: Context) : Rec
        val hospital = hospitalList[position]
         with(holder){
             nameTxt.text = hospital.organisationName
+            itemView.setOnClickListener {
+                onListItemClick.onHospitalClick(hospital)
+            }
+
         }
     }
+
 
 
 
@@ -35,4 +40,9 @@ class ListAdapter(val hospitalList: List<Hospital> , val context: Context) : Rec
         val nameTxt = itemView.findViewById<TextView>(R.id.name_txt)
     }
 
+}
+
+
+interface onListItemClick{
+    fun onHospitalClick(data : Hospital)
 }

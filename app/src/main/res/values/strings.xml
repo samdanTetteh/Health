@@ -1,5 +1,6 @@
 <resources>
     <string name="app_name">Sensyne</string>
+    <string name="home_title">Sensyne Health</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
@@ -13,4 +14,6 @@
     <string name="error_reading_file_txt">Error reading CSV file!</string>
     <string name="error_closing_file_txt">Error closing file!</string>
     <string name="details_arrow_txt">details arrow</string>
+    <string name="show_website_txt">Show Website</string>
+    <string name="go_to_location_txt">Check Location</string>
 </resources>

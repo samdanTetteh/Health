@@ -9,7 +9,8 @@ import kotlinx.android.parcel.Parcelize
 @Parcelize
 @Entity(tableName = "Hospitals")
 data class Hospital (
-    @PrimaryKey()
+    @PrimaryKey(autoGenerate = true)
+    val id: Int = 0,
     val organisationID: Long,
     val organisationCode: String?,
     val organisationType: String?,
@@ -32,4 +33,13 @@ data class Hospital (
     val email: String?,
     val website: String?,
     val fax: String?
-):Parcelable
+):Parcelable {
+
+    fun getInitials() : String?{
+        val orgName = "${this.organisationName?.split(" ")?.get(0)} ${this.organisationName?.split(" ")?.get(1)}"
+       return orgName
+            ?.split(' ')
+            ?.mapNotNull { it.firstOrNull()?.toString() }
+            ?.reduce { acc, s -> acc + s }
+    }
+}

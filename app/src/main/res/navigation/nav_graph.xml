@@ -8,5 +8,21 @@
         android:id="@+id/listFragment"
         android:name="com.ijikod.sensyne.ListFragment"
         android:label="fragment_list"
-        tools:layout="@layout/fragment_list" />
+        tools:layout="@layout/fragment_list" >
+        <action
+            android:id="@+id/action_listFragment_to_detailsFragment"
+            app:destination="@id/detailsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/detailsFragment"
+        android:name="com.ijikod.sensyne.DetailsFragment"
+        android:label="fragment_details"
+        tools:layout="@layout/fragment_details">
+
+        <argument android:name="hospital"
+            app:argType="com.ijikod.sensyne.Model.Hospital"/>
+
+
+
+    </fragment>
 </navigation>
