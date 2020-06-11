@@ -11,6 +11,7 @@ import kotlinx.android.parcel.Parcelize
 @Entity(tableName = "Hospitals")
 data class Hospital (
     @PrimaryKey(autoGenerate = true)
+    val uid : Int = 0,
     val organisationID: Long,
     val organisationCode: String?,
     val organisationType: String?,

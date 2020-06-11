@@ -123,6 +123,7 @@ class Repository(val context: Context) {
 
         // Read the file line by line starting from the second line
 
+        var id = 0
         line = fileReader?.readLine()
         while (line != null) {
             val lineData = line.split(Regex("""[�]"""))
@@ -170,18 +171,9 @@ class Repository(val context: Context) {
              Toast.makeText(context, context.getString(R.string.error_closing_file_txt), Toast.LENGTH_LONG).show()
          }
      }
-
-
     }
 
 
-
-
-
-
-
-
-    //Todo: how can i do this better
     @Suppress("DEPRECATION")
     private fun isNetworkAvailable() : Boolean{
         val connectivityManager = appContext.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
