@@ -9,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import com.ijikod.sensyne.R
 import com.ijikod.sensyne.databinding.FragmentDetailsBinding
 import com.ijikod.sensyne.ui.Inspector
 
@@ -36,7 +37,7 @@ class DetailsFragment(val inspector: Inspector) : Fragment() {
             binding.countryTxt.text = it.county
             binding.sectorTxt.text = it.sector
             binding.postcodeTxt.text = it.postcode
-            binding.subTypeTxt.text = it.subType
+            binding.subTypeTxt.text = getString(R.string.sub_type_txt, it.subType)
 
 
             val gmmIntentUri: Uri = Uri.parse("google.navigation:q=${it.latitude},${it.longitude}")

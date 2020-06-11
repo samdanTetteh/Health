@@ -91,9 +91,9 @@ class Repository(val context: Context) {
                         readDataFromCache()
 
                     }
-                
+
             } catch (e: Exception) {
-                errorMsg.postValue(e.message)
+               Log.d("loading file", e.toString())
             }
 
         }else{
@@ -113,7 +113,7 @@ class Repository(val context: Context) {
     private suspend fun readDataFromCache() {
         val hospitals = mutableListOf<Hospital>()
 
- try {
+
      
  
 
@@ -157,14 +157,11 @@ class Repository(val context: Context) {
             line = fileReader.readLine()
         }
 
+
      dao.deleteAll()
      dao.insertHospitals(hospitals)
      hospitalData.postValue(dao.getAll())
 
- }catch (e: Exception){
-     Log.e("error reading file", e.toString(), e)
-     errorMsg.postValue(context.getString(R.string.error_reading_file_txt))
- }finally {
      try {
          fileReader.close()
      }catch (e: IOException){
@@ -173,7 +170,7 @@ class Repository(val context: Context) {
              Toast.makeText(context, context.getString(R.string.error_closing_file_txt), Toast.LENGTH_LONG).show()
          }
      }
- }
+
 
     }
 

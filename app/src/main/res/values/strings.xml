@@ -21,4 +21,5 @@
     <string name="show_nhs_hospital_title">Show NHS Hospitals</string>
     <string name="show_nhs_hospitals">Show NHS Hospitals</string>
     <string name="nhs_filter">%NHS%</string>
+    <string name="sub_type_txt">Sub Type - %1$s</string>
 </resources>
