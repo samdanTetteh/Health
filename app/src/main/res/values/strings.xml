@@ -16,4 +16,9 @@
     <string name="details_arrow_txt">details arrow</string>
     <string name="show_website_txt">Show Website</string>
     <string name="go_to_location_txt">Check Location</string>
+    <string name="all_menu_title">All</string>
+    <string name="show_all_hospitals">show all hospitals</string>
+    <string name="show_nhs_hospital_title">Show NHS Hospitals</string>
+    <string name="show_nhs_hospitals">Show NHS Hospitals</string>
+    <string name="nhs_filter">%NHS%</string>
 </resources>

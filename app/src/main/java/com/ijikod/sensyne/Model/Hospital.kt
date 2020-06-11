@@ -9,8 +9,7 @@ import kotlinx.android.parcel.Parcelize
 @Parcelize
 @Entity(tableName = "Hospitals")
 data class Hospital (
-    @PrimaryKey(autoGenerate = true)
-    val id: Int = 0,
+    @PrimaryKey()
     val organisationID: Long,
     val organisationCode: String?,
     val organisationType: String?,

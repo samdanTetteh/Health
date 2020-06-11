@@ -43,6 +43,21 @@ class Repository(val context: Context) {
         }
 
     }
+    
+    
+    
+    fun getHospitalData(isFilter: Boolean){
+        CoroutineScope(Dispatchers.IO).launch {
+
+            hospitalData.postValue(emptyList())
+            if (isFilter){
+                hospitalData.postValue(dao.getNHSHospitals(context.getString(R.string.nhs_filter)))
+            }else{
+                hospitalData.postValue(dao.getAll())
+            }
+        }
+
+    }
 
 
 
@@ -137,10 +152,10 @@ class Repository(val context: Context) {
             line = fileReader.readLine()
         }
 
-     Log.d("hospital>>>>>>>>", "${hospitals.size} is the size")
-     dao.deleteAll()
-     dao.insertHospitals(hospitals)
-     hospitalData.postValue(dao.getAll())
+//     Log.d("hospital>>>>>>>>", "${hospitals.size} is the size")
+//     dao.deleteAll()
+//     dao.insertHospitals(hospitals)
+//     hospitalData.postValue(dao.getAll())
 
  }catch (e: Exception){
      Log.e("error reading file", e.toString(), e)
@@ -148,6 +163,10 @@ class Repository(val context: Context) {
      errorMsg.postValue(e.toString())
  }finally {
      try {
+         Log.d("hospital>>>>>>>>", "${hospitals.size} is the size")
+         dao.deleteAll()
+         dao.insertHospitals(hospitals)
+         hospitalData.postValue(dao.getAll())
          fileReader.close()
      }catch (e: IOException){
          errorMsg.postValue(context.getString(R.string.error_closing_file_txt))

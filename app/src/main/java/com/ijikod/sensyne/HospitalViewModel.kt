@@ -12,4 +12,7 @@ class HospitalViewModel(val context: Context) : ViewModel() {
     val errorMsgs = hospitalRepository.errorMsg
 
 
+    fun getData(isNhs : Boolean ){
+        hospitalRepository.getHospitalData(isNhs)
+    }
 }

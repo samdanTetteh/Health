@@ -2,10 +2,8 @@ package com.ijikod.sensyne
 
 import android.os.Bundle
 import android.util.Log
+import android.view.*
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.lifecycle.Observer
@@ -64,6 +62,8 @@ class ListFragment(val inspector: Inspector) : Fragment() {
             showList(false)
         })
 
+        setHasOptionsMenu(true)
+
         inspector.setTitle(getString(R.string.home_title))
         inspector.setActionBarUpVisibility(false)
 
@@ -84,6 +84,22 @@ class ListFragment(val inspector: Inspector) : Fragment() {
     }
 
 
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.menu, menu)
+        super.onCreateOptionsMenu(menu, inflater)
+    }
+
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        if (item.itemId.equals(R.id.all)){
+            viewModel.getData(false)
+        }else{
+            viewModel.getData(true)
+        }
+
+
+        return super.onOptionsItemSelected(item)
+    }
 
 
 
