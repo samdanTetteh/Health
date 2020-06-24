@@ -1,7 +1,7 @@
-# Sensyne-Health
+# Health
 
 
-Instructions on running Sensyne Health App 
+Instructions on running Health App 
 1. Open Android Studio and clone application by using "Check out project from version control" option.
 2. Select GIT and copy paste git hub repository link.
 3. Click clone to clone applicaton to desired directory destination.
